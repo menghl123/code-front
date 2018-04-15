@@ -1,0 +1,96 @@
+<div class="login">
+  <div nz-row>
+    <div nz-col [nzSpan]="7" [nzOffset]="15">
+      <div class="login-box">
+        <div class="login-title">
+          CODE <span>注册</span>
+        </div>
+        <form class="form" nz-form [formGroup]="form">
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSm]="6">
+              <label nz-form-item-required>邮箱</label>
+            </div>
+            <div nz-form-control nz-col [nzSm]="14" nzHasFeedback>
+              <nz-input [nzSize]="'large'" formControlName="mail" [nzId]="'mail'"></nz-input>
+              <div nz-form-explain
+                   *ngIf="form.controls.mail.touched && form.controls.mail.hasError('required')">
+                邮箱不能为空！
+              </div>
+              <div nz-form-explain
+                   *ngIf="form.controls.mail.touched && form.controls.mail.hasError('email') && !form.controls.mail.hasError('required')">
+                请输入合法的邮箱！
+              </div>
+            </div>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSm]="6">
+              <label nz-form-item-required>昵称</label>
+            </div>
+            <div nz-form-control nz-col [nzSm]="14" nzHasFeedback>
+              <nz-input maxlength="16" maxLength="16"  [nzSize]="'large'" formControlName="nickName" [nzId]="'nickName'"></nz-input>
+              <div nz-form-explain
+                   *ngIf="form.controls.nickName.touched && form.controls.nickName.hasError('required')">
+                昵称不能为空！
+              </div>
+              <div nz-form-explain
+                   *ngIf="form.controls.nickName.touched && form.controls.nickName.hasError('maxlength')">
+                昵称不能超过16字符！
+              </div>
+            </div>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSm]="6">
+              <label nz-form-item-required>密码</label>
+            </div>
+            <div nz-form-control nz-col [nzSm]="14" nzHasFeedback>
+              <nz-input [nzSize]="'large'" formControlName="password" [nzType]="'password'" [nzId]="'password'"
+                        (ngModelChange)="updateConfirmValidator()"></nz-input>
+              <div nz-form-explain
+                   *ngIf="form.controls.password.touched && form.controls.password.hasError('required')">
+                密码不能为空！
+              </div>
+            </div>
+          </div>
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSm]="6" [nzXs]="24">
+              <label  nz-form-item-required>密码确认</label >
+            </div>
+            <div nz-form-control nz-col [nzSm]="14" [nzXs]="24" nzHasFeedback>
+              <nz-input [nzSize]="'large'" formControlName="checkPassword" [nzType]="'password'" [nzId]="'checkPassword'"></nz-input>
+              <div nz-form-explain
+                   *ngIf="form.controls.checkPassword.touched && form.controls.checkPassword.hasError('required')">
+                请再次输入密码！
+              </div>
+              <div nz-form-explain
+                   *ngIf="form.controls.checkPassword.touched && form.controls.checkPassword.hasError('confirm')">
+                两次输入的密码不一致！
+              </div>
+            </div>
+          </div>
+
+          <div nz-form-item nz-row>
+            <div nz-form-label nz-col [nzSm]="6">
+              <label nz-form-item-required>每日期望得分</label>
+            </div>
+            <div nz-form-control nz-col [nzSm]="14" nzHasFeedback>
+              <nz-input-number formControlName="aims" [nzMin]="0" [nzMax]="100" [nzStep]="1"></nz-input-number>
+              <div nz-form-explain
+                   *ngIf="form.controls.nickName.touched && form.controls.nickName.hasError('required')">
+                每日期望得分不能为空！
+              </div>
+            </div>
+          </div>
+
+          <div nz-form-item nz-row style="margin-bottom:8px;">
+            <div nz-form-control nz-col [nzSpan]="14" [nzOffset]="6">
+              <button (click)="doRegister()" [disabled]="form.invalid" nz-button [nzSize]="'large'" [nzType]="'primary'">注册</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

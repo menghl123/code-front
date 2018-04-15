@@ -1,0 +1,30 @@
+.login {
+  width: 100%;
+  height: 100vh;
+  background-image: url(/assets/imgs/login_bg.jpg);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  .login-box{
+    background: #fff;
+    border-radius: 4px !important;
+    margin-top: 22vh;
+    padding:10px;
+  }
+
+  .login-title{
+    font-size: 24px;
+    padding: 4px 8px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0,0,0,0.1) ;
+    span{
+      font-size: 24px;
+      opacity: 0.9;
+    }
+  }
+
+  .form{
+    padding: 12px 8px;
+  }
+
+}
