@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {TmacHttpClient} from '../../../tmacHttp/tmac-http-client';
 import {Observable} from 'rxjs/Observable';
 
@@ -11,5 +11,10 @@ export class LoginService {
   public login(user: any): Observable<any> {
     return this.tmacHttpClient
       .post('index/register', user);
+  }
+
+  public loginMock(user: any): Observable<any> {
+    return this.tmacHttpClient
+      .get('/mock/users.json');
   }
 }
