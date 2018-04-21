@@ -25,6 +25,12 @@ export class AppComponent {
             this.isLoading = false;
           }, 500);
         }
+      })
+      .setInterceptor({
+        request: (req) => {
+          // return req.clone({headers: req.headers.set('withCredentials', 'true')});
+        },
+        response: (res) => null
       });
   }
 }

@@ -17,9 +17,7 @@ export class ExamComponent implements OnInit {
   }
 
   ngOnInit() {
-    BreadcrumbService.setBreadcrumbService([
-      {label: '发布题解'}
-    ]);
+
   }
 
 }

@@ -1,15 +1,10 @@
 <app-layout>
   <div nz-row style="padding: 20px">
     <div nz-col [nzSpan]="6">
-      <nz-card class="card"  [nzLoading]="allLoading">
+      <nz-card class="card" >
         <ng-template #title>
           积分总排名
         </ng-template>
-        <ng-template #extra>
-          <a (click)="freshAllRank('asc')">前十名</a>
-          |
-          <a (click)="freshAllRank('desc')">后十名</a>
-        </ng-template>
         <ng-template #body>
           <nz-badge>
             <ng-template #content>
@@ -33,23 +28,18 @@
     </div>
 
     <div nz-col [nzSpan]="6" [nzOffset]="3">
-      <nz-card class="card" [nzLoading]="dayLoading">
+      <nz-card class="card" >
         <ng-template #title>
           今日积分排名
         </ng-template>
-        <ng-template #extra>
-          <a (click)="freshDayRank('asc')">前十名</a>
-          |
-          <a (click)="freshDayRank('desc')">后十名</a>
-        </ng-template>
         <ng-template #body>
           <nz-badge>
             <ng-template #content>
               <div class="inner-content">
-                <ng-container *ngIf="allRankers && allRankers.length >0">
-                  <div class="rank-item" *ngFor="let item of allRankers,let i =index">
+                <ng-container *ngIf="dayRankers && dayRankers.length >0">
+                  <div class="rank-item" *ngFor="let item of dayRankers,let i =index">
                     <span class="user-rank"><nz-badge [nzStatus]="'processing'"></nz-badge>   {{i + 1}}</span>
-                    <span class="user-name">{{item?.nickName}}</span>
+                    <span class="user-name">{{item?.nickName || ' '}}</span>
                     <span class="usercount">{{item?.count}}分</span>
                   </div>
                 </ng-container>
@@ -65,24 +55,19 @@
     </div>
 
     <div nz-col [nzSpan]="6" [nzOffset]="3">
-      <nz-card class="card" [nzLoading]="checkLoading">
+      <nz-card class="card">
         <ng-template #title>
           签到总排名
-        </ng-template>
-        <ng-template #extra>
-          <a (click)="freshDayRank('asc')">前十名</a>
-          |
-          <a (click)="freshDayRank('desc')">后十名</a>
         </ng-template>
         <ng-template #body>
           <nz-badge>
             <ng-template #content>
               <div class="inner-content">
-                <ng-container *ngIf="allRankers && allRankers.length >0">
-                  <div class="rank-item" *ngFor="let item of allRankers,let i =index">
+                <ng-container *ngIf="checkRankers && checkRankers.length >0">
+                  <div class="rank-item" *ngFor="let item of checkRankers,let i =index">
                     <span class="user-rank"><nz-badge [nzStatus]="'processing'"></nz-badge>   {{i + 1}}</span>
-                    <span class="user-name">{{item?.nickName}}</span>
-                    <span class="usercount">{{item?.count}}分</span>
+                    <span class="user-name">{{item?.nickName  || ''}}</span>
+                    <span class="usercount">{{item?.count}}次</span>
                   </div>
                 </ng-container>
                 <ng-container *ngIf="!allRankers || allRankers.length ===0">

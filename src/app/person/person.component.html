@@ -4,7 +4,7 @@
       <nz-avatar nzSrc="https://gw.alipayobjects.com/zos/rmsportal/lctvVCLfRpYCkYxAsiVQ.png"></nz-avatar>
     </div>
     <div class="desc">
-      <div class="desc-title">您好！{{user?.nickName}}</div>
+      <div class="desc-title">昵称：{{user?.nickName}}</div>
       <div>每日目标积分:{{user?.aims}} 分</div>
     </div>
   </div>
@@ -19,10 +19,14 @@
       <ng-template #body>
         <nz-badge>
           <ng-template #content>
-            <div class="inner-content">
+            <div *ngIf="ownDetail" class="inner-content">
               <h2><a class="head-example" *ngIf="checkStatus === 0">您未达成目标积分，不能签到</a></h2><br>
               <h2><a class="head-example" (click)="doCheck()" *ngIf="checkStatus === 1">点击签到</a></h2><br>
               <h2><a class="head-example" *ngIf="checkStatus === 2">已签到</a></h2><br>
+            </div>
+            <div *ngIf="!ownDetail" class="inner-content">
+              <h2><a class="head-example" *ngIf="user?.check === 1">已签到</a></h2><br>
+              <h2><a class="head-example" *ngIf="user?.check === 0">未签到</a></h2><br>
             </div>
           </ng-template>
         </nz-badge>

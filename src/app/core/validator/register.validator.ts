@@ -18,4 +18,14 @@ export class RegisterValidator {
     };
   }
 
+  nameExist(name?: string) {
+    return (control: AbstractControl) => {
+      return this.userService.name(control.value)
+        .map(result => {
+            return result.data.success === 0 || name === control.value ? null : {'nameExist': true};
+          }
+        );
+    };
+  }
+
 }

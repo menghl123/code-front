@@ -15,26 +15,10 @@ export class RankComponent implements OnInit {
   dayRankers: any[];
   checkRankers: any[];
 
-  allLoading = false;
-  dayLoading = false;
-  checkLoading = false;
-
   constructor(private authorizationService: TmacAuthorizationService,
               private messageService: NzMessageService,
               private integralService: IntegralService,
               private userService: UserService) {
-    this.allRankers = [
-      {nickName: 1111, count: 2212121},
-      {nickName: 1111, count: 2212121},
-      {nickName: 1111, count: 2212121},
-      {nickName: 1111, count: 2212121},
-      {nickName: 1111, count: 2212121},
-      {nickName: 1111, count: 2212121},
-      {nickName: 1111, count: 2212121},
-      {nickName: 1111, count: 2212121},
-      {nickName: 1111, count: 2212121},
-      {nickName: 1111, count: 2212121},
-    ]
   }
 
   ngOnInit() {
@@ -45,82 +29,41 @@ export class RankComponent implements OnInit {
   }
 
   private initRankers() {
-    this.allLoading = true;
-    this.checkLoading = true;
-    this.dayLoading = true;
-    this.integralService.all()
-      .subscribe(result => {
-        if (result.status === 200) {
-          this.allRankers = result.data;
-        } else {
-          this.allLoading = false;
-        }
-      }, error => {
-        this.allLoading = false;
-      });
-
-    this.integralService.day()
-      .subscribe(result => {
-        if (result.status === 200) {
-          this.dayRankers = result.data;
-        } else {
-          this.dayLoading = false;
-        }
-      }, error => {
-        this.dayLoading = false;
-      });
-
-    this.integralService.check()
-      .subscribe(result => {
-        if (result.status === 200) {
-          this.checkRankers = result.data;
-        } else {
-          this.checkLoading = false;
-        }
-      }, error => {
-        this.checkLoading = false;
-      });
+    this.freshAllRank('asc');
+    this.freshDayRank('asc');
+    this.freshCheckRank('asc');
   }
 
   freshAllRank(type: 'desc' | 'asc') {
-    this.allLoading = true;
     this.integralService.all(type)
       .subscribe(result => {
         if (result.status === 200) {
           this.allRankers = result.data;
         } else {
-          this.allLoading = false;
         }
       }, error => {
-        this.allLoading = false;
       });
   }
 
   freshDayRank(type: 'desc' | 'asc') {
-    this.dayLoading = true;
     this.integralService.day(type)
       .subscribe(result => {
         if (result.status === 200) {
           this.dayRankers = result.data;
         } else {
-          this.dayLoading = false;
         }
       }, error => {
-        this.dayLoading = false;
       });
   }
 
   freshCheckRank(type: 'desc' | 'asc') {
-    this.checkLoading = true;
     this.integralService.check(type)
       .subscribe(result => {
         if (result.status === 200) {
           this.checkRankers = result.data;
         } else {
-          this.checkLoading = false;
         }
       }, error => {
-        this.checkLoading = false;
       });
   }
 }

@@ -1,3 +1,70 @@
-<p>
-  exam-list works!
-</p>
+<div style="padding: 30px">
+  <div nz-row>
+    <div nz-col [nzSpan]="6">
+      <nz-radio-group [(ngModel)]="mode">
+        <label (click)="changeMode('all')" nz-radio-button [nzValue]="'all'"><span>所有</span></label>
+        <label (click)="changeMode('title')" nz-radio-button [nzValue]="'title'"><span>根据标题查询</span></label>
+      </nz-radio-group>
+    </div>
+    <div nz-col [nzSpan]="8" [nzOffset]="2">
+      <nz-input [(ngModel)]="title" *ngIf="mode === 'title'" nzPlaceHolder="请输入题目标题" [nzSize]="'large'"
+                [nzId]="'slug'"></nz-input>
+    </div>
+    <div *ngIf="mode !== 'all'" nz-form-control nz-col [nzSpan]="4" [nzOffset]="1">
+      <button (click)="refreshData()" nz-button [nzSize]="'large'"
+              [nzType]="'primary'">
+        查询
+      </button>
+    </div>
+  </div>
+  <br>
+  <nz-table #nzTable
+            [nzAjaxData]="_dataSet"
+            nzShowSizeChanger
+            [nzTotal]="_total"
+            [(nzPageIndex)]="_current"
+            (nzPageIndexChange)="refreshData()"
+            [(nzPageSize)]="_pageSize"
+            (nzPageSizeChange)="refreshData(true)">
+    <thead nz-thead>
+    <tr>
+      <th nz-th>
+        <span>题目标题</span>
+      </th>
+      <th nz-th>
+        <span>发布用户</span>
+      </th>
+      <th nz-th>
+        <span>发布时间</span>
+      </th>
+      <th nz-th>
+        <span>题解评分</span>
+      </th>
+      <th nz-th>
+        <span>难度</span>
+      </th>
+
+      <th nz-th><span>标签</span></th>
+      <th nz-th><span>操作</span></th>
+    </tr>
+    </thead>
+    <tbody nz-tbody>
+    <tr nz-tbody-tr *ngFor="let data of nzTable.data">
+      <td nz-td>
+        <a>{{data?.title}} </a>
+      </td>
+      <td nz-td><a (click)="goUserDetail(data)">{{data?.nickName}}</a></td>
+      <td nz-td>{{data?.date | date:'yyyy-MM-dd HH:MM:SS'}}</td>
+      <td nz-td>{{data?.mark}}</td>
+      <td nz-td>{{data?.difficulty}}星</td>
+      <td nz-td>
+        <nz-tag *ngFor="let tag of tagsMapper(data?.tags)" [nzColor]="'pink'">{{tag}}</nz-tag>
+      <td nz-td>
+        <button nz-button [nzType]="'primary'" (click)="detail(data?.id)">
+          <i class="anticon anticon-search"></i><span>查看详情</span>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</div>

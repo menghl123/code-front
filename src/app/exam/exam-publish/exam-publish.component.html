@@ -13,7 +13,7 @@
   </div>
 
   <div nz-form-item nz-row style="margin-bottom:8px;">
-    <div nz-form-control nz-col [nzSpan]="18" [nzOffset]="4">
+      <div nz-form-control nz-col [nzSpan]="18" [nzOffset]="4">
       <button (click)="query()" [disabled]="form.controls.slug.invalid" nz-button [nzSize]="'large'"
               [nzType]="'primary'">
         获取题目
@@ -54,11 +54,10 @@
       <label nz-form-item-required>题解</label>
     </div>
     <div nz-form-control nz-col [nzSm]="18" nzHasFeedback>
-      <ckeditor id="text" #ckeditor debounce="500"
-                [readonly]="false" formControlName="markdown"
-                [config]="editorConfig"></ckeditor>
+      <nz-input formControlName="markdown" [nzRows]="20"
+                [nzType]="'textarea'" [nzSize]="'large'">
+      </nz-input>
     </div>
-    {{form.value | json}}
   </div>
 
   <div nz-form-item nz-row style="margin-bottom:8px;">

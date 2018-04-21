@@ -18,14 +18,14 @@ export class IntegralService {
 
   public all(type?: 'asc' | 'desc'): Observable<Result> {
     return this.tmacHttpClient
-      .get('integral/day', {
+      .get('integral/all', {
         params: {type: type || 'asc', ignoreLoading: true}
       });
   }
 
   public check(type?: 'asc' | 'desc'): Observable<Result> {
     return this.tmacHttpClient
-      .get('integral/day', {
+      .get('integral/check', {
         params: {type: type || 'asc', ignoreLoading: true}
       });
   }

@@ -23,4 +23,30 @@ export class AnswerService {
       });
   }
 
+  public get(page: any): Observable<Result> {
+    return this.tmacHttpClient
+      .get('answer/get', {
+        params: page
+      });
+  }
+
+  public getCount(): Observable<Result> {
+    return this.tmacHttpClient
+      .get('answer/get/count', {});
+  }
+
+  public getByTitle(page: any): Observable<Result> {
+    return this.tmacHttpClient
+      .get('answer/getByTitle', {
+        params: page
+      });
+  }
+
+  public getByTitleCount(title: string): Observable<Result> {
+    return this.tmacHttpClient
+      .get('answer/getByTitle/count', {
+        params: {title: title}
+      });
+  }
+
 }

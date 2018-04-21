@@ -12,9 +12,7 @@ export class UserService {
 
   public check(): Observable<Result> {
     return this.tmacHttpClient
-      .post('user/check', null, {
-        headers: {withCredentials: true}
-      });
+      .post('user/check', null);
   }
 
   public login(user: User): Observable<Result> {
@@ -44,4 +42,12 @@ export class UserService {
         params: {id: id}
       });
   }
+
+  public name(name: string): Observable<Result> {
+    return this.tmacHttpClient
+      .get('user/name', {
+        params: {name: name, ignoreLoading: true}
+      });
+  }
+
 }

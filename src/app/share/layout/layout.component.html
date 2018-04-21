@@ -10,7 +10,7 @@
           登录
         </a>
       </li>
-      <li nz-menu-item>题解页</li>
+      <li nz-menu-item (click)="navigateByUrl('/exam/list')">题解页</li>
       <li nz-menu-item (click)="navigateByUrl('/rank')">积分榜</li>
       <li nz-submenu *ngIf="user">
         <span title>

@@ -4,6 +4,7 @@ import {AnswerService} from '../../core/business-service/answer.service';
 import {Question} from '../../../model/question.model';
 import {NzMessageService} from 'ng-zorro-antd';
 import {DomSanitizer} from '@angular/platform-browser';
+import {BreadcrumbService} from '../../core/common-service/breadcrumb.service';
 
 @Component({
   selector: 'app-exam-publish',
@@ -26,7 +27,9 @@ export class ExamPublishComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.initCkeditor();
+    BreadcrumbService.setBreadcrumbService([
+      {label: '发布题解'}
+    ]);
   }
 
   get tags() {
@@ -67,7 +70,7 @@ export class ExamPublishComponent implements OnInit {
   query() {
     // zigzag-conversion
     const slug = this.form.value.slug;
-    this.answerService.query(slug).subscribe(result => {
+    this.answerService.query((slug || '').trim()).subscribe(result => {
       if (result.status === 200) {
         this.question = result.data;
       } else {
@@ -78,13 +81,4 @@ export class ExamPublishComponent implements OnInit {
     });
   }
 
-  private initCkeditor() {
-    this.editorConfig = {
-      removeButtons: 'Source,Save,NewPage,Scayt',
-      image_previewText: '',
-      filebrowserBrowseUrl: 'http://127.0.0.1/',
-      filebrowserUploadUrl: 'http://localhost:8080/api/upload/image',
-      height: 300
-    };
-  }
 }

@@ -6,7 +6,7 @@
 export const environment = {
   production: false,
   api: {
+    ip: 'http://localhost:8080',
     host: 'http://localhost:8080/api/v1',
-    staticHost: 'http://127.0.0.1/'
   }
 };

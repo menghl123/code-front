@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
               private nzMessageService: NzMessageService,
               private userService: UserService) {
     this.form = this.fb.group({
-      nickName: ['', [Validators.required, Validators.maxLength(16)]],
+      nickName: ['', [Validators.required, Validators.maxLength(16)], this.registerValidator.nameExist()],
       mail: ['', [Validators.email, Validators.required], this.registerValidator.mailExist()],
       password: ['', [Validators.required]],
       checkPassword: ['', [Validators.required, this.confirmationValidator]],

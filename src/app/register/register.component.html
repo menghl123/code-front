@@ -42,6 +42,10 @@
                    *ngIf="form.controls.nickName.touched && form.controls.nickName.hasError('maxlength')">
                 昵称不能超过16字符！
               </div>
+              <div nz-form-explain
+                   *ngIf="form.controls.nickName.touched && form.controls.nickName.hasError('nameExist')">
+                昵称已存在！
+              </div>
             </div>
           </div>
 

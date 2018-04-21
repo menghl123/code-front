@@ -6,7 +6,7 @@
 export const environment = {
   production: false,
   api: {
-    host: 'http://localhost:4200/',
-    staticHost: 'http://127.0.0.1/'
+    ip: 'http://121.250.222.132:23333',
+    host: 'http://121.250.222.132:23333/api/v1',
   }
 };
