@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {RegisterService} from '../core/business-service/register.service';
+import {RegisterValidator} from '../core/validator/register.validator';
+import {Router} from '@angular/router';
+import {NzMessageService} from 'ng-zorro-antd';
+import {UserService} from '../core/business-service/user.service';
 
 @Component({
   selector: 'app-register',
@@ -8,14 +11,17 @@ import {RegisterService} from '../core/business-service/register.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-
   form: FormGroup;
+  isVisible = false;
 
   constructor(private fb: FormBuilder,
-              private registerService: RegisterService) {
+              private registerValidator: RegisterValidator,
+              private router: Router,
+              private nzMessageService: NzMessageService,
+              private userService: UserService) {
     this.form = this.fb.group({
       nickName: ['', [Validators.required, Validators.maxLength(16)]],
-      mail: ['', [Validators.email, Validators.required]],
+      mail: ['', [Validators.email, Validators.required], this.registerValidator.mailExist()],
       password: ['', [Validators.required]],
       checkPassword: ['', [Validators.required, this.confirmationValidator]],
       aims: [0, [Validators.required]],
@@ -40,12 +46,27 @@ export class RegisterComponent implements OnInit {
   }
 
   doRegister() {
-    this.registerService.register(this.form.value)
-      .subscribe(() => {
+    this.userService.register(this.form.value)
+      .subscribe(result => {
+        if (result.status === 200) {
+          this.showModal();
+        } else {
+          this.nzMessageService.error(`注册失败,原因:${result.message}`);
+        }
+      });
+  }
 
-      }, error => {
+  showModal = () => {
+    this.isVisible = true;
+  }
 
-      })
+  handleOk = (e) => {
+    this.isVisible = false;
+    this.router.navigate(['/login']);
+  }
+
+  handleCancel = (e) => {
+    this.isVisible = false;
   }
 
 }

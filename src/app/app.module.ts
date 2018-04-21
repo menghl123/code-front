@@ -8,6 +8,7 @@ import {RouterModule} from '@angular/router';
 import {ShareModule} from './share/share.module';
 import {ROUTER_CONFIG} from './app.router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     ShareModule,
     RouterModule.forRoot(ROUTER_CONFIG)
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

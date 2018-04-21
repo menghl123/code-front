@@ -1,10 +1,16 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {RankComponent} from './rank.component';
+import {ShareModule} from '../share/share.module';
+import {RouterModule} from '@angular/router';
+import {ROUTER_CONFIG} from './rank.router';
 
 @NgModule({
   imports: [
-    CommonModule
+    ShareModule,
+    RouterModule.forChild(ROUTER_CONFIG
+    )
   ],
-  declarations: []
+  declarations: [RankComponent]
 })
-export class RankModule { }
+export class RankModule {
+}

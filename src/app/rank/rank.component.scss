@@ -1,0 +1,18 @@
+
+.rank-item {
+  margin-bottom: 20px;
+  .user-rank {
+    font-weight: 400;
+    font-size: 18px;
+    display: inline-block;
+    width: 50px;
+  }
+  .user-name {
+    margin-left: 10px;
+    font-size: 16px;
+  }
+  .usercount {
+    margin-left: 10px;
+    font-size: 16px;
+  }
+}

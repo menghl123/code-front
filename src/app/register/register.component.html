@@ -21,6 +21,10 @@
                    *ngIf="form.controls.mail.touched && form.controls.mail.hasError('email') && !form.controls.mail.hasError('required')">
                 请输入合法的邮箱！
               </div>
+              <div nz-form-explain
+                   *ngIf="form.controls.mail.touched && form.controls.mail.hasError('mailExist')">
+                邮箱已存在！
+              </div>
             </div>
           </div>
 
@@ -94,3 +98,11 @@
     </div>
   </div>
 </div>
+<nz-modal [nzVisible]="isVisible" [nzTitle]="'提示'" [nzContent]="modalContent" (nzOnCancel)="handleCancel($event)" (nzOnOk)="handleOk($event)">
+  <ng-template #modalContent>
+    <h2 style="color: darkgreen">
+      <i class="anticon anticon-check"></i>
+      注册成功！
+    </h2>
+    <h3>请进入您的邮箱，查看激活邮件，并且激活账号！</h3>
+  </ng-template>

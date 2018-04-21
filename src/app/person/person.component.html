@@ -1,1 +1,60 @@
-<app-layout></app-layout>
+<app-layout>
+  <div class="page-header">
+    <div class="avatar">
+      <nz-avatar nzSrc="https://gw.alipayobjects.com/zos/rmsportal/lctvVCLfRpYCkYxAsiVQ.png"></nz-avatar>
+    </div>
+    <div class="desc">
+      <div class="desc-title">您好！{{user?.nickName}}</div>
+      <div>每日目标积分:{{user?.aims}} 分</div>
+    </div>
+  </div>
+  <div class="card-container">
+    <nz-card class="card">
+      <ng-template #title>
+        签到
+      </ng-template>
+      <ng-template #extra>
+        <a nz-tooltip="完成每日目标积分后才能够签到" href="#"><i class="anticon anticon-question-circle"></i></a>
+      </ng-template>
+      <ng-template #body>
+        <nz-badge>
+          <ng-template #content>
+            <div class="inner-content">
+              <h2><a class="head-example" *ngIf="checkStatus === 0">您未达成目标积分，不能签到</a></h2><br>
+              <h2><a class="head-example" (click)="doCheck()" *ngIf="checkStatus === 1">点击签到</a></h2><br>
+              <h2><a class="head-example" *ngIf="checkStatus === 2">已签到</a></h2><br>
+            </div>
+          </ng-template>
+        </nz-badge>
+      </ng-template>
+    </nz-card>
+    <nz-card class="card">
+      <ng-template #title>
+        总积分
+      </ng-template>
+      <ng-template #body>
+        <nz-badge>
+          <ng-template #content>
+            <div class="inner-content">
+              <h2><a class="head-example">{{user?.integra || 0}}分</a></h2><br>
+            </div>
+          </ng-template>
+        </nz-badge>
+      </ng-template>
+    </nz-card>
+    <nz-card class="card">
+      <ng-template #title>
+        今日积分
+      </ng-template>
+      <ng-template #body>
+        <nz-badge>
+          <ng-template #content>
+            <div class="inner-content">
+              <h2><a class="head-example">{{user?.day || 0}}分</a></h2><br>
+            </div>
+          </ng-template>
+        </nz-badge>
+      </ng-template>
+    </nz-card>
+  </div>
+</app-layout>

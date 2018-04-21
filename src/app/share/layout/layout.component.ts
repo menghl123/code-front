@@ -18,7 +18,6 @@ export class LayoutComponent implements OnInit {
     BreadcrumbService.breadChangeSubject.subscribe(breadcrumbs => {
       this.breadcrumbs = breadcrumbs;
     });
-
     this.user = this.authorizationService.getCurrentUser();
   }
 

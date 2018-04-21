@@ -11,15 +11,15 @@
         </a>
       </li>
       <li nz-menu-item>题解页</li>
-      <li nz-menu-item>积分榜</li>
+      <li nz-menu-item (click)="navigateByUrl('/rank')">积分榜</li>
       <li nz-submenu *ngIf="user">
         <span title>
           用户：{{user?.nickName}}
           <i class="anticon anticon-down"></i>
         </span>
         <ul>
-          <li nz-menu-item>发布题解</li>
-          <li nz-menu-item (click)="navigateByUrl('/person')" >个人信息</li>
+          <li nz-menu-item (click)="navigateByUrl('/exam/publish')">发布题解</li>
+          <li nz-menu-item (click)="navigateByUrl('/person')">个人信息</li>
           <li nz-menu-item (click)="logout()">退出登录</li>
         </ul>
       </li>
@@ -36,7 +36,9 @@
       </nz-breadcrumb-item>
     </nz-breadcrumb>
 
-    <div class="inner-content"></div>
+    <div class="inner-content">
+      <ng-content></ng-content>
+    </div>
   </nz-content>
 
   <nz-footer class="footer">CODE FRONT ©2018 Implement By Angular@5.0</nz-footer>

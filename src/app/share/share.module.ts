@@ -1,16 +1,17 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgZorroAntdModule} from 'ng-zorro-antd';
-import { LayoutComponent } from './layout/layout.component';
+import {LayoutComponent} from './layout/layout.component';
+import {CKEditorModule} from 'ng2-ckeditor';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NgZorroAntdModule
+    NgZorroAntdModule,
+    CKEditorModule
   ],
   declarations: [LayoutComponent],
   exports: [
@@ -18,7 +19,9 @@ import { LayoutComponent } from './layout/layout.component';
     FormsModule,
     ReactiveFormsModule,
     NgZorroAntdModule,
-    LayoutComponent
+    LayoutComponent,
+    CKEditorModule
   ]
 })
-export class ShareModule { }
+export class ShareModule {
+}

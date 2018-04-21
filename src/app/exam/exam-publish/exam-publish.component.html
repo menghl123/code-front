@@ -1,3 +1,72 @@
-<p>
-  exam-publish works!
-</p>
+<form class="form" nz-form [formGroup]="form">
+  <div nz-form-item nz-row style="padding-top: 20px">
+    <div nz-form-label nz-col [nzSm]="4">
+      <label nz-form-item-required>题目地址</label>
+    </div>
+    <div nz-form-control nz-col [nzSm]="18" nzHasFeedback>
+      <nz-input formControlName="slug" [nzSize]="'large'" [nzId]="'slug'"></nz-input>
+      <div nz-form-explain
+           *ngIf="form.controls.slug.touched && form.controls.slug.hasError('required')">
+        请输入题目地址
+      </div>
+    </div>
+  </div>
+
+  <div nz-form-item nz-row style="margin-bottom:8px;">
+    <div nz-form-control nz-col [nzSpan]="18" [nzOffset]="4">
+      <button (click)="query()" [disabled]="form.controls.slug.invalid" nz-button [nzSize]="'large'"
+              [nzType]="'primary'">
+        获取题目
+      </button>
+    </div>
+  </div>
+
+  <div nz-form-item nz-row style="margin-bottom:8px;">
+    <div nz-form-control nz-col [nzSpan]="18" [nzOffset]="4">
+      <nz-card *ngIf="question">
+        <ng-template #title>
+          标题：{{question?.title}}
+        </ng-template>
+        <ng-template #extra>
+          <nz-rate [nzDefaultValue]="question?.difficulty || 0" nzDisabled></nz-rate>
+        </ng-template>
+        <ng-template #body>
+          <p >
+            标签：<nz-tag *ngFor="let tag of tags" [nzColor]="'pink'">{{tag}}</nz-tag>
+          </p>
+          <div [innerHtml]="questionContent"></div>
+        </ng-template>
+      </nz-card>
+
+      <nz-card *ngIf="!question">
+        <ng-template #body>
+          <h3>
+            当前无题目，请先获取题目...
+          </h3>
+        </ng-template>
+      </nz-card>
+    </div>
+  </div>
+
+
+  <div nz-form-item nz-row style="padding-top: 20px">
+    <div nz-form-label nz-col [nzSm]="4">
+      <label nz-form-item-required>题解</label>
+    </div>
+    <div nz-form-control nz-col [nzSm]="18" nzHasFeedback>
+      <ckeditor id="text" #ckeditor debounce="500"
+                [readonly]="false" formControlName="markdown"
+                [config]="editorConfig"></ckeditor>
+    </div>
+    {{form.value | json}}
+  </div>
+
+  <div nz-form-item nz-row style="margin-bottom:8px;">
+    <div nz-form-control nz-col [nzSpan]="18" [nzOffset]="4">
+      <button (click)="publish()" [disabled]="!question || form.controls.markdown.invalid" nz-button [nzSize]="'large'"
+              [nzType]="'primary'">
+        提交题解
+      </button>
+    </div>
+  </div>
+</form>
